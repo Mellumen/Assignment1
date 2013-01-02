@@ -10,6 +10,7 @@ public class Splash extends Activity{
 	protected void onCreate(Bundle savedState) {
 		super.onCreate(savedState);
 		setContentView(R.layout.splash); 
+		
 		//Makes the splash screen sleep for 5 sec:
 		Thread timer = new Thread() {
 			public void run() {

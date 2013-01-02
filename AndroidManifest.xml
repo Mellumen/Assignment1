@@ -29,6 +29,30 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-    </application>
+        <activity
+            android:name=".ImageViewer"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="com.example.assignment1.IMAGEVIEWER" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DataTask"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="com.example.assignment1.DataTask" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+	<!-- Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name ="android.permission.READ_PHONE_STATE" />
+    
 </manifest>
