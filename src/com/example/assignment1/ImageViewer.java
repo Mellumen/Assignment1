@@ -6,14 +6,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
  
-import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
  
-public class ImageViewer extends Activity {
+public class ImageViewer extends MainActivity {
  
     public static final String URL = "http://hig.no/design/HiG_new/images/higlogo.png";
     ImageView imageView;
@@ -30,6 +30,7 @@ public class ImageViewer extends Activity {
         // Execute the task
         task.execute(new String[] { URL });
     }
+    
  
     private class GetXMLTask extends AsyncTask<String, Void, Bitmap> {
         @Override
@@ -44,7 +45,8 @@ public class ImageViewer extends Activity {
         // Sets the Bitmap returned by doInBackground
         @Override
         protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
+            //imageView.setImageBitmap(result);
+            reload(result);
         }
  
         // Creates Bitmap from InputStream and returns it

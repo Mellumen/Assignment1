@@ -47,6 +47,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GetText"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="com.example.assignment1.GetText" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET" />

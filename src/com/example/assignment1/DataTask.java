@@ -26,32 +26,25 @@ public class DataTask extends MainActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// Checks if the user is connected to the internet
+		//Try to connect:
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-		// If connected, send the message
+		//If connected, send data:
 		if (networkInfo != null && networkInfo.isConnected()) {
 			// do stuff
 			new SendGet().execute();
 		}
-		// else notify user that he is not connected, and open wireless and
-		// network settings
+		//Else ask user to change settings:
 		else {
 			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 			alertDialog.setTitle("Internet is disabled!");
 			alertDialog.setMessage("Open settings?");
 			alertDialog.setButton(-3, "OK",
 					new DialogInterface.OnClickListener() {
-
 						public void onClick(DialogInterface dialog, int which) {
 							startActivity(new Intent(
 									Settings.ACTION_WIRELESS_SETTINGS));
-
-							// not sure how to refresh the activity, so finish
-							// this activity and go back to main
-							// when the user user clicks back from the settings
-							// page
 							finish();
 						}
 					});
@@ -60,7 +53,7 @@ public class DataTask extends MainActivity {
 		}
 	}
 
-	// Creates a new thread and downloads the image in that new thread
+	//Creates a new thread to send the data:
 	private class SendGet extends AsyncTask<Void, Void, String> {
 
 		ProgressDialog pd;
@@ -68,7 +61,6 @@ public class DataTask extends MainActivity {
 		@Override
 		protected String doInBackground(Void... params) {
 			try {
-
 				HttpClient client = new DefaultHttpClient();
 				String getURL = "http://gtl.hig.no/mobile/logging.php?user=Ruud&data=Hello";
 				HttpGet get = new HttpGet(getURL);
@@ -79,11 +71,12 @@ public class DataTask extends MainActivity {
 					Toast.makeText(getApplicationContext(), "Not working",
 							Toast.LENGTH_LONG).show();
 				}
-
-			} catch (Exception e) {
+			} 
+			catch (Exception e) {
 				System.out.println("Error..." + e);
 			}
-			reload();
+			//reload(); //Reloads the main-activity
+			finish();
 			return null;
 		}
 
@@ -95,9 +88,8 @@ public class DataTask extends MainActivity {
 
 		@Override
 		protected void onPreExecute() {
-			pd = ProgressDialog.show(DataTask.this, "Loading...",
+			pd = ProgressDialog.show(DataTask.this, "Uploading...",
 					"Data is uploading...");
 		}
-		
 	}
 }
