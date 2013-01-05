@@ -6,7 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
  
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -33,6 +33,8 @@ public class ImageViewer extends MainActivity {
     
  
     private class GetXMLTask extends AsyncTask<String, Void, Bitmap> {
+    	ProgressDialog pd;
+    	
         @Override
         protected Bitmap doInBackground(String... urls) {
             Bitmap map = null;
@@ -45,9 +47,17 @@ public class ImageViewer extends MainActivity {
         // Sets the Bitmap returned by doInBackground
         @Override
         protected void onPostExecute(Bitmap result) {
-            //imageView.setImageBitmap(result);
+        	pd.dismiss();
             reload(result);
+            finish();
         }
+
+		@Override
+		protected void onPreExecute() {
+			pd = ProgressDialog.show(ImageViewer.this, "Loading...",
+					"Downloading image...");
+
+		}
  
         // Creates Bitmap from InputStream and returns it
         private Bitmap downloadImage(String url) {

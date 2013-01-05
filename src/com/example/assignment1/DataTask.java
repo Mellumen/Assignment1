@@ -5,7 +5,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -55,7 +54,6 @@ public class DataTask extends MainActivity {
 
 	//Creates a new thread to send the data:
 	private class SendGet extends AsyncTask<Void, Void, String> {
-
 		ProgressDialog pd;
 
 		@Override
@@ -73,9 +71,8 @@ public class DataTask extends MainActivity {
 				}
 			} 
 			catch (Exception e) {
-				System.out.println("Error..." + e);
+				System.out.println("Error: " + e);
 			}
-			//reload(); //Reloads the main-activity
 			finish();
 			return null;
 		}
@@ -88,8 +85,8 @@ public class DataTask extends MainActivity {
 
 		@Override
 		protected void onPreExecute() {
-			pd = ProgressDialog.show(DataTask.this, "Uploading...",
-					"Data is uploading...");
+			pd = ProgressDialog.show(DataTask.this, "Loading...",
+					"Uploading data...");
 		}
 	}
 }

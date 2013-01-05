@@ -23,6 +23,7 @@ public class Splash extends Activity{
 				finally{
 					Intent startMain = new Intent("com.example.assignment1.MAINACTIVITY");
 					startActivity(startMain);
+					finish();
 				}
 			}
 		};
